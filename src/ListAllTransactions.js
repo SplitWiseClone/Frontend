@@ -70,7 +70,6 @@ export default function ListAllTransactions() {
                                             ) : (
                                                 <p className='text-xl font-semibold font-sans px-5 py-0'>{taker} <b>owes</b> ₹{transaction.amount/transaction.num_people}</p>
                                             )
-                                            // <p className='text-xl font-semibold font-sans px-5 py-0'>{taker} <b>received</b> ₹{transaction.amount / transaction.takers.length}</p>
                                         ))
                                     ) : (
                                         <p className='text-xl font-semibold font-sans px-5 py-0'>No takers</p>
