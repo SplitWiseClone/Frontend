@@ -11,6 +11,7 @@ import SendResetPasswordEmail from "./SendResetPasswordEmail";
 import ResetPassword from "./ResetPassword";
 import ListAllTransactions from "./ListAllTransactions";
 import SimplifiedBalance from "./SimplifiedBalance";
+import EditTransaction from "./EditTransaction";
 function App() {
     const [user, setUser] = React.useState(null);
 
@@ -28,6 +29,7 @@ function App() {
               <Route path="api/user/reset/:uid/:token" element={<ResetPassword />} />
             <Route path="listAllTransactions" element={<ListAllTransactions />} />
             <Route path="simplifiedBalance" element={<SimplifiedBalance />} />
+            <Route path="editTransaction/:id" element={<EditTransaction />} />
           </Route>
         </Routes>
       </BrowserRouter>

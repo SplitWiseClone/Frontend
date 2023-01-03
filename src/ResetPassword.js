@@ -5,13 +5,13 @@ import {useNavigate, useParams} from "react-router-dom";
 
 export default function ResetPassword(){
     const [user, setUser] = React.useState(null);
+    let navigate = useNavigate();
     useEffect(() => {
         axios.get(
             process.env.REACT_APP_BACKEND_URL + '/api/user/profile/',
             {headers: {"Authorization": `Bearer ${localStorage.getItem('token')}`, "Accept": 'application/json'}}).
         then((response) => {
             setUser(response.data);
-            console.log(response.data);
         }).catch((error) => {
             console.log(error);
         });
@@ -20,14 +20,12 @@ export default function ResetPassword(){
         password: "",
         password2: "",
     });
-    let navigate = useNavigate();
     const {uid, token} = useParams();
     console.log("uid: ", uid, " token: ", token);
     return (
-        (user!==null) ? (
             <div>
                 <NavBar />
-                <form className="mt-8 space-y-6 flex flex-col items-center" onSubmit={
+                <form className="h-[80vh] space-y-6 flex flex-col items-center justify-center" onSubmit={
             (e) => {
                 e.preventDefault();
                 axios.post(
@@ -40,6 +38,9 @@ export default function ResetPassword(){
                 )
                 .then(function (response) {
                   console.log(response);
+                  if(response.status === 200){
+                    navigate('/login');
+                  }
                   localStorage.setItem("token", response.data.token.access);
                   console.log(localStorage.getItem("token"));
                   navigate("/");
@@ -50,7 +51,7 @@ export default function ResetPassword(){
                 });
             }
           }>
-            <div className="-space-y-px rounded-md shadow-sm w-1/4 mx-10 flex flex-col items-center mt-56">
+            <div className="-space-y-px rounded-md shadow-sm w-1/4 mx-10 flex flex-col items-center">
               <div className='w-full'>
                 <input
                   id="password"
@@ -92,15 +93,5 @@ export default function ResetPassword(){
             </div>
           </form>
             </div>
-        )
-            : (
-                <div>
-                    <NavBar />
-                    <h1 className='text-2xl font-semibold font-sans px-5 py-5'>Welcome to WiseSplit 😂😂</h1>
-                    <p className='px-5 text-xl pb-5'>A simple app to split your bills with your friends</p>
-                    {/* Login button*/}
-                    <a href="/login" className=' text-xl text-blue-700 pl-5 font-semibold active:text-red-600'> Login </a> or <a className='text-xl text-blue-700 font-semibold active:text-red-600' href="/signup"> Signup</a>
-                </div>
-            )
     );
 }

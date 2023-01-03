@@ -2,12 +2,13 @@ import { LockClosedIcon } from '@heroicons/react/20/solid'
 import React, {useState} from "react";
 import axios from "axios";
 import NavBar from "./NavBar";
+import {useNavigate} from "react-router-dom";
 
 export default function SendResetPasswordEmail() {
   const [userData, setUserData] = useState({
         email: "",
     });
-  console.log(process.env.REACT_APP_BACKEND_URL);
+    let navigate = useNavigate();
   return (
     <>
       <NavBar />
@@ -31,6 +32,10 @@ export default function SendResetPasswordEmail() {
                 )
                 .then(function (response) {
                   console.log(response);
+                  console.log("status:: ", response.status);
+                    if(response.status === 200){
+                        navigate("/login");
+                    }
                   // localStorage.setItem("token", response.data.token);
                   // console.log(localStorage.getItem("token"));
                 })

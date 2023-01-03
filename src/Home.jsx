@@ -1,9 +1,11 @@
 import React, {useEffect} from 'react';
 import axios from "axios";
 import NavBar from "./NavBar";
+import {useNavigate} from "react-router-dom";
 
 export default function Home(){
     const [user, setUser] = React.useState(null);
+    let navigate = useNavigate();
     useEffect(() => {
         axios.get(
             process.env.REACT_APP_BACKEND_URL + '/api/user/profile/',
@@ -13,6 +15,7 @@ export default function Home(){
             console.log(response.data);
         }).catch((error) => {
             console.log(error);
+            navigate("/");
         });
     } ,[]);
     return (

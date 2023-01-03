@@ -5,6 +5,7 @@ import axios from "axios";
 
 export default function SimplifiedBalance(){
     const [user, setUser] = React.useState(null);
+    let navigate = useNavigate();
     useEffect(() => {
         axios.get(
             process.env.REACT_APP_BACKEND_URL + '/api/user/profile/',
@@ -14,6 +15,7 @@ export default function SimplifiedBalance(){
             console.log(response.data);
         }).catch((error) => {
             console.log(error);
+            navigate('/');
         });
     } ,[]);
     const [simplifiedBalanceData, setSimplifiedBalanceData] = useState(null);
@@ -37,7 +39,6 @@ export default function SimplifiedBalance(){
     }, []);
     console.log("simplifiedBalanceData: ", simplifiedBalanceData);
 
-    let navigate = useNavigate();
     return ((user!==null)
          ? (
             <div>

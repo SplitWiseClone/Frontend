@@ -80,7 +80,7 @@ export default function Login() {
             <div className="flex items-center justify-between">
 
               <div className="text-sm">
-                <a href = {process.env.REACT_APP_BACKEND_URL + "/accounts/password_reset/"} className="font-medium text-indigo-600 hover:text-indigo-500">
+                <a href = {'/resetPassword'} className="font-medium text-indigo-600 hover:text-indigo-500">
                   Forgot your password?
                 </a>
               </div>
